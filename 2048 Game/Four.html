@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>2048 Game</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHNQ9CC40B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BHNQ9CC40B');
+</script>
+
+
+  <link href="https://www.2048.org/style/main.css?v=8" rel="stylesheet" type="text/css">
+  <style>
+.score-container:after {
+  content: "Score";
+}
+.best-container:after {
+  content: "Best";
+}
+  </style>
+  <link rel="shortcut icon" href="https://www.2048.org/favicon.ico">
+  <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+  <div id='accountSnippet' style='float:right; padding-right:20px; text-align:right'>&#8987;</div>
+<script>
+function beetuxInit(beetuxIsLoggedIn, beetuxIsPremium, beetuxUsername, beetuxUserId) {
+  if (!beetuxIsLoggedIn) {
+    document.getElementById('accountSnippet').innerHTML =
+      "[<a href='/memberships/?rm=pre_payment_invitation'>Get a membership</a>] " +
+      "[<a href='/memberships/?rm=account'>My account</a>]";
+  } else if (!beetuxIsPremium) {
+    document.getElementById('accountSnippet').innerHTML =
+      "Hello, <strong>" + beetuxUsername + "</strong> " +
+      "[<a href='/memberships/?rm=pre_payment_invitation'>Get a membership</a>] " +
+      "[<a href='/memberships/?rm=account'>My account</a>]";
+  } else {
+    document.getElementById('accountSnippet').innerHTML =
+      "Hello, <strong>" + beetuxUsername + "</strong> <span style='color:#fb0;'>&starf;</span> " +
+      "[<a href='/memberships/'>My account</a>]";
+  }
+}
+</script>
+<script defer src='/memberships/?rm=get_subscription_status&rand=4360281'>
+</script>
+
+  <div class="container">
+    <div class="heading">
+      <p class="title"><img src="https://www.2048.org/logo.png" alt="2048.org"></p>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+      </div>
+    </div>
+
+    <div class="above-game">
+      <p class="game-intro">Join numbers to get to the <strong>2048 tile</strong>!</p>
+      <a class="restart-button">New Game</a>
+    </div>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+          <a class="keep-playing-button">Keep going</a>
+          <a class="retry-button">Try again</a>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
+
+      <div class="tile-container">
+
+      </div>
+    </div>
+
+    <p class="game-explanation">
+      <strong class="important"><a href="/strategy-tips/" style="text-decoration:underline;color:blue">How to play 2048:</a></strong>
+      Use <strong>arrow keys</strong> to move the tiles. When two tiles having the same number touch, they <strong>join into one!</strong>
+    </p>
+  </div>
+
+  <div style="text-align:center; margin: 15px auto;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8644252537816192"
+     crossorigin="anonymous"></script>
+<!-- 2048.org Square -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8644252537816192"
+     data-ad-slot="8877681348"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</body>
+</html>

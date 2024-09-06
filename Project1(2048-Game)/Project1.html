@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Game</title>
+    <link rel="stylesheet" href="Project1.css">
+</head>
+<body>
+    <div class="container">
+        <section class="part-1">
+            <b>2048.org</b>
+            <span>Score<br><span id="score">0</span></span>
+            <span> High Score<br><span id="topScore">0</span></span>
+        </section>
+        <section class="part-2">
+            <p class="second">Join numbers to get to the <strong>2048 tile!</strong></p>
+            <button id="new-game" onclick="newGame()">New Game</button>
+        </section>
+
+        <section id="board"></section>
+        <p id="game-over">Oops! Game Over....</p>
+        <p><a href="Description.html" class="bottom">How to play 2048:</a>Use arrow keys to move the tiles.<br><br>&nbsp;When two tiles having the same number touch, they join into one!</p>
+    </div>
+    <script src="Project1.js"></script>
+</body>
+</html>

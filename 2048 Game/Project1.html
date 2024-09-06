@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Game</title>
+    <style>
+        .container
+        {
+            width: 450px;
+            height: 700px;
+            border:2px solid;
+            margin:0 35%;
+            padding:0 50px;
+            background-color: lemonchiffon;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+        }
+        .container .part-1
+        {
+            display: grid;
+            grid-template-columns: 240px 100px 100px;
+            text-align: center;
+            gap:5px;
+            padding:5px;
+        }
+        b
+        {
+            font-size: 50px;
+            color:dimgray;
+            margin-right: 150px;
+        }
+        .part-1>span
+        {
+            background-color: #ababaa;
+            color:white;
+            font-size: 20px;
+            margin-bottom: 5px;
+            border:4px solid grey;
+            border-radius: 4px;
+        }
+        .container .part-2
+        {
+            display: grid;
+            grid-template-columns: 300px 140px;
+            gap:5px;
+        }
+        .second
+        {
+            color: dimgray;
+            font-size: 20px;
+        }
+        #board
+        {
+            height: 440px;
+            width: 440px;
+            background-color: lightcyan;
+            border:8px solid hsla(60, 1%, 30%, 0.8);
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 10px;
+        }
+        .tile
+        {
+                width: 100px;
+                height: 100px;
+                border: 5px solid #bbada0;
+                font-size: 40px;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+        }
+        #new-game
+        {
+            background-color: #ababaa;
+            color:white;
+            font-size: 1.2em;
+            border:5px solid gray;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #game-over
+        {
+            font-size: 30px;
+            color:red ;
+            margin-left:50px;
+        }
+        .x2
+        {
+            background-color:rgb(240, 200, 200);
+            color:hsl(225, 70%, 49%);
+        }
+        .x4
+        {
+            background-color:lightblue;
+            color:crimson;
+        }
+        .x8
+        {
+            background-color:lightgray;
+            color:#575252;
+        }
+        .x16
+        {
+            background-color:lightgreen;
+            color:green;
+        }
+        .x32
+        {
+            background-color:lightseagreen;
+            color:darkgreen;
+        }
+        .x64
+        {
+            background-color: lightgoldenrodyellow;
+            color:goldenrod;
+        }
+        .x128
+        {
+            background-color:rgb(246, 183, 183);
+            color:rgb(231, 96, 46);
+        }
+        .x256
+        {
+            background-color:lightsalmon;
+            color:rgb(230, 53, 34);
+        }
+        .x512
+        {
+            background-color:darkorange;
+            color:red;
+        }
+        .x1024,.x2048,.x4096
+        {
+            background-color: #333;
+            color:white;
+        }
+        p .bottom
+            {
+                color: blue;
+                font-size: 25px;
+                margin-left:10px;
+                font-weight: bold;
+            }
+    </style>
+<script defer data-domain="copper-genevieve-33.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+    <div class="container">
+        <section class="part-1">
+            <b>2048.org</b>
+            <span>Score<br><span id="score">0</span></span>
+            <span> High Score<br><span id="topScore">0</span></span>
+        </section>
+        <section class="part-2">
+            <p class="second">Join numbers to get to the <strong>2048 tile!</strong></p>
+            <button id="new-game" onclick="newGame()">New Game</button>
+        </section>
+
+        <section id="board"></section>
+        <p id="game-over">Oops! Game Over....</p>
+        <p><a href="Project2.html" class="bottom">How to play 2048:</a>Use arrow keys to move the tiles.<br><br>&nbsp;When two tiles having the same number touch, they join into one!</p>
+
+    </div>
+    <script>
+        // localStorage.removeItem('highScore');
+        // localStorage.clear();
+        var board;
+        var newScore=0;
+        var topScore=localStorage.setItem("topScore",topScore) || 0;
+        document.getElementById('topScore').innerText=topScore;
+        var rows=4;
+        var columns=4;
+        window.onload= function()
+        {
+            playGame();
+        }
+        function playGame()
+        {
+            document.getElementById('game-over').style.display="none";
+            newScore=0;
+            document.getElementById('score').innerText=newScore;
+            board=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+            // board=[[2,2,2,2],[4,4,4,4],[4,4,4,4],[2,2,2,2]];     
+            document.getElementById('board').innerHTML="";
+            for(let r=0;r<rows;r++)
+            {
+                for(let c=0;c<columns;c++)
+                {
+                    let tile=document.createElement('div');
+                    tile.id=r.toString() + "-" + c.toString();
+                    let num=board[r][c];
+                    updateTile(tile,num);
+                    document.getElementById('board').append(tile);
+                }
+            }
+            setTwo();
+            setTwo();
+        }
+        function updateTile(tile,num)
+        {
+            tile.innerText="";
+            tile.classList.value="";
+            tile.classList.add('tile');
+            if(num>0)
+            {
+                tile.innerText=num.toString();
+                if(num<=4096)
+                {
+                    tile.classList.add("x"+num.toString());
+                }
+                else
+                {
+                    tile.classList.add('x8192');
+                }
+            }
+        }
+        function hasEmptyTile()
+        {
+            for(let r=0;r<rows;r++)
+            {
+                for(let c=0;c<columns;c++)
+                {
+                    if(board[r][c]==0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        function setTwo()
+        {
+            if(!hasEmptyTile())
+            {
+                return;
+            }
+            let found=false;
+            while(!found)
+            {
+                let r=Math.floor(Math.random()*rows);
+                let c=Math.floor(Math.random()*columns);
+                if(board[r][c]==0)
+                {
+                    board[r][c]=2;
+                    let tile=document.getElementById(r.toString() + "-" + c.toString());
+                    tile.innerText='2';
+                    tile.classList.add('x2');
+                    found=true
+                }
+
+            }
+        }
+        function filterZero(row)
+        {
+            return row.filter((num) => num!=0);
+        }
+        function slide(row)
+        {
+            row=filterZero(row);
+            for(let i=0;i<row.length-1;i++)
+            {
+                if(row[i]==row[i+1])
+                {
+                    row[i] *= 2;
+                    row[i+1]=0;
+                    newScore += row[i];
+                }
+            }
+            row=filterZero(row);
+            while(row.length<columns)
+            {
+                row.push(0);
+            }
+            return row;
+        }
+        function slideLeft()
+        {
+            for(let r=0;r<rows;r++)
+            {
+                let row=board[r];
+                row=slide(row);
+                board[r]=row;
+                for(let c=0;c<columns;c++)
+                {
+                    let tile=document.getElementById(r.toString() + "-" + c.toString());
+                    let num=board[r][c]
+                    updateTile(tile,num);
+                }
+            }
+        }
+        function slideRight()
+        {
+            for(let r=0;r<rows;r++)
+            {
+                let row=board[r];
+                row.reverse();
+                row=slide(row);
+                board[r]=row.reverse();
+                for(let c=0;c<columns;c++)
+                {
+                    let tile=document.getElementById(r.toString() + "-" + c.toString());
+                    let num=board[r][c]
+                    updateTile(tile,num);
+                }
+            }
+        }
+        function slideUp()
+        {
+            for(let c=0;c<columns;c++)
+            {
+                let row=[board[0][c],board[1][c],board[2][c],board[3][c]];
+                row=slide(row);
+                for(let r=0;r<rows;r++)
+                {
+                    board[r][c]=row[r];
+                    let tile=document.getElementById(r.toString() + "-" + c.toString());
+                    let num=board[r][c]
+                    updateTile(tile,num);
+                }
+            }
+        }
+        function slideDown()
+        {
+            for(let c=0;c<columns;c++)
+            {
+                let row=[board[0][c],board[1][c],board[2][c],board[3][c]];
+                row.reverse();
+                row=slide(row);
+                row.reverse();
+                for(let r=0;r<rows;r++)
+                {
+                    board[r][c]=row[r];
+                    let tile=document.getElementById(r.toString() + "-" + c.toString());
+                    let num=board[r][c]
+                    updateTile(tile,num);
+                }
+            }
+        }
+        document.addEventListener('keyup',(e) =>
+        {
+            if(e.code=="ArrowLeft")
+            {
+                slideLeft();
+                setTwo();
+            }
+            else if(e.code=="ArrowRight")
+            {
+                slideRight();
+                setTwo();
+            }
+            else if(e.code=="ArrowUp")
+            {
+                slideUp();
+                setTwo();
+            }
+            else if(e.code=="ArrowDown")
+            {
+                slideDown();
+                setTwo();
+            }
+            document.getElementById('score').innerText=newScore;
+            if(newScore>topScore)
+            {
+                topScore=newScore;
+                localStorage.setItem('topScore',topScore);
+                document.getElementById('topScore').innerText=topScore;
+            }
+            if(!canMove())
+            {
+                document.getElementById('game-over').style.display='block';
+            }
+        })
+        function canMove()
+        {
+            for(let r=0;r<rows;r++)
+            {
+                for(let c=0;c<columns;c++)
+                {
+                    if(board[r][c]==0)
+                    {
+                        return true;
+                    }
+                    if(c<columns-1 && board[r][c]==board[r][c+1])
+                    {
+                        return true;
+                    }
+                    if(r<rows-1 && board[r][c]==board[r+1][c])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;   
+        }
+        function newGame()
+        {
+            playGame();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+
+.container
+{
+    width: 450px;
+    height: 700px;
+    border:2px solid;
+    margin:0 35%;
+    padding:0 50px;
+    background-color: lemonchiffon;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.container .part-1
+{
+    display: grid;
+    grid-template-columns: 240px 100px 100px;
+    text-align: center;
+    gap:5px;
+    padding:5px;
+}
+b
+{
+    font-size: 50px;
+    color:dimgray;
+    margin-right: 150px;
+}
+.part-1>span
+{
+    background-color: #ababaa;
+    color:white;
+    font-size: 20px;
+    margin-bottom: 5px;
+    border:4px solid grey;
+    border-radius: 4px;
+}
+.container .part-2
+{
+    display: grid;
+    grid-template-columns: 300px 140px;
+    gap:5px;
+}
+.second
+{
+    color: dimgray;
+    font-size: 20px;
+}
+#board
+{
+    height: 440px;
+    width: 440px;
+    background-color: lightcyan;
+    border:8px solid hsla(60, 1%, 30%, 0.8);
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+.tile
+{
+        width: 100px;
+        height: 100px;
+        border: 5px solid #bbada0;
+        font-size: 40px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+}
+#new-game
+{
+    background-color: #ababaa;
+    color:white;
+    font-size: 1.2em;
+    border:5px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#game-over
+{
+    font-size: 30px;
+    color:red ;
+    margin-left:50px;
+}
+.x2
+{
+    background-color:rgb(240, 200, 200);
+    color:hsl(225, 70%, 49%);
+}
+.x4
+{
+    background-color:lightblue;
+    color:crimson;
+}
+.x8
+{
+    background-color:lightgray;
+    color:#575252;
+}
+.x16
+{
+    background-color:lightgreen;
+    color:green;
+}
+.x32
+{
+    background-color:lightseagreen;
+    color:darkgreen;
+}
+.x64
+{
+    background-color: lightgoldenrodyellow;
+    color:goldenrod;
+}
+.x128
+{
+    background-color:rgb(246, 183, 183);
+    color:rgb(231, 96, 46);
+}
+.x256
+{
+    background-color:lightsalmon;
+    color:rgb(230, 53, 34);
+}
+.x512
+{
+    background-color:darkorange;
+    color:red;
+}
+.x1024,.x2048,.x4096
+{
+    background-color: #333;
+    color:white;
+}
+p .bottom
+    {
+        color: blue;
+        font-size: 25px;
+        margin-left:10px;
+        font-weight: bold;
+    }
