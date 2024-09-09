@@ -1,9 +1,7 @@
-// localStorage.removeItem('highScore');
-// localStorage.clear();
 var board;
 var newScore=0;
-var topScore=localStorage.setItem("topScore",topScore) || 0;
-document.getElementById('topScore').innerText=topScore;
+var highScore = localStorage.getItem("bestScore") || 0;
+document.getElementById('bestScore').innerText = highScore;  
 var rows=4;
 var columns=4;
 window.onload= function()
@@ -195,11 +193,11 @@ document.addEventListener('keyup',(e) =>
         setTwo();
     }
     document.getElementById('score').innerText=newScore;
-    if(newScore>topScore)
+    if(newScore>highScore)
     {
-        topScore=newScore;
-        localStorage.setItem('topScore',topScore);
-        document.getElementById('topScore').innerText=topScore;
+        highScore=newScore;
+        localStorage.setItem('bestScore',highScore);
+        document.getElementById('bestScore').innerText=highScore;
     }
     if(!canMove())
     {
